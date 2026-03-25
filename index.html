@@ -16,27 +16,27 @@
         <div class="hero__eyebrow">Защищенный вход</div>
         <div class="hero__grid hero__grid--hub">
           <div class="hero__copy">
-            <h1>Дашборды Tilda под входом</h1>
+            <h1>Единый вход в статистику проектов</h1>
             <p>
-              Это точка входа в общую статистику по проектам RVZ и VGS2000.
-              После авторизации откроется главная страница со списком доступных дашбордов.
+              Одна точка доступа для рабочих дашбордов RVZ и VGS2000.
+              После авторизации откроется каталог проектов, из которого можно сразу перейти в нужную статистику.
             </p>
           </div>
           <div class="hero__meta hero__meta--hub">
             <div class="meta-line meta-line--compact">
-              <span>Режим</span>
-              <strong>Вход обязателен</strong>
+              <span>Точка входа</span>
+              <strong>Каталог + дашборды</strong>
             </div>
             <div class="meta-line meta-line--compact">
-              <span>После входа</span>
-              <strong>Главная + 2 дашборда</strong>
+              <span>Текущие группы</span>
+              <strong>2 проекта</strong>
             </div>
             <div class="meta-stack">
-              <span>Что внутри</span>
+              <span>Доступные направления</span>
               <div class="meta-pills">
                 <span class="meta-pill">RVZ</span>
                 <span class="meta-pill">VGS2000</span>
-                <span class="meta-pill">Главная страница</span>
+                <span class="meta-pill">Каталог дашбордов</span>
               </div>
             </div>
           </div>
@@ -48,46 +48,99 @@
           <div class="panel__head panel__head--stack">
             <div>
               <div class="panel__eyebrow">Авторизация</div>
-              <h2>Открыть доступ к статистике</h2>
+              <h2>Войти в закрытый контур статистики</h2>
             </div>
             <p class="panel__sub">
-              Введите логин и пароль, чтобы загрузить защищенные датасеты и перейти в каталог дашбордов.
+              Введите логин и пароль, чтобы открыть каталог и перейти к нужной группе сайтов без лишней навигации.
             </p>
+          </div>
+
+          <div class="auth-ribbon" aria-hidden="true">
+            <span class="auth-ribbon__dot"></span>
+            <span>RVZ</span>
+            <span class="auth-ribbon__divider"></span>
+            <span>VGS2000</span>
+            <span class="auth-ribbon__divider"></span>
+            <span>Будущие проекты</span>
           </div>
 
           <form class="auth-form" id="login-form">
             <label class="auth-field">
               <span>Логин</span>
-              <input id="login-username" name="username" type="text" autocomplete="username" required>
+              <input
+                id="login-username"
+                name="username"
+                type="text"
+                autocomplete="username"
+                placeholder="Введите логин"
+                required
+              >
             </label>
 
             <label class="auth-field">
               <span>Пароль</span>
-              <input id="login-password" name="password" type="password" autocomplete="current-password" required>
+              <input
+                id="login-password"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                placeholder="Введите пароль"
+                required
+              >
             </label>
 
             <p class="auth-error" id="login-error" hidden></p>
 
             <button class="auth-submit" type="submit">Войти в дашборды</button>
+
+            <p class="auth-footnote">
+              После входа откроется главная страница со списком всех подключенных дашбордов.
+            </p>
           </form>
         </article>
 
-        <article class="panel panel--auth-note reveal">
+        <article class="panel panel--auth-stage reveal">
           <div class="panel__head panel__head--stack">
             <div>
-              <div class="panel__eyebrow">Важно</div>
-              <h2>Это легкая защита для GitHub Pages</h2>
+              <div class="panel__eyebrow">После входа</div>
+              <h2>Рабочий маршрут внутри статистики</h2>
             </div>
             <p class="panel__sub">
-              Интерфейс скрыт за входом, а датасеты на сайте лежат в зашифрованном виде.
-              Для действительно чувствительной аналитики лучше использовать серверный доступ-контроль.
+              Сначала каталог, затем быстрый переход в нужную группу сайтов и уже внутри сам дашборд со сводкой, графиками и детализацией.
             </p>
           </div>
 
-          <div class="auth-points">
-            <div class="auth-point">Главная страница открывается только после успешного входа.</div>
-            <div class="auth-point">Дашборды RVZ и VGS2000 защищены этим же входом.</div>
-            <div class="auth-point">Поисковые системы дополнительно просят не индексировать страницы.</div>
+          <div class="auth-stage">
+            <div class="auth-stage__flow">
+              <div class="auth-stage__card auth-stage__card--primary">
+                <div class="auth-stage__label">Шаг 01</div>
+                <strong>Каталог дашбордов</strong>
+                <span>Один экран со всеми подключенными проектами.</span>
+              </div>
+
+              <div class="auth-stage__arrow" aria-hidden="true"></div>
+
+              <div class="auth-stage__cluster">
+                <div class="auth-stage__mini auth-stage__mini--copper">
+                  <div class="auth-stage__label">RVZ</div>
+                  <strong>2 площадки</strong>
+                  <span>Основной сайт и промо-зеркало.</span>
+                </div>
+
+                <div class="auth-stage__mini auth-stage__mini--slate">
+                  <div class="auth-stage__label">VGS2000</div>
+                  <strong>17 площадок</strong>
+                  <span>Сводная группа сайтов в одном доступе.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="auth-stage__footer">
+              <div class="auth-stage__foot-card">
+                <div class="auth-stage__label">Дальше</div>
+                <strong>Новые проекты можно добавлять без перестройки главной страницы.</strong>
+              </div>
+            </div>
           </div>
         </article>
       </section>

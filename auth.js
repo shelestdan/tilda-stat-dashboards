@@ -199,8 +199,13 @@
 
     const form = document.getElementById("login-form");
     if (!form) return;
+    const submitButton = form.querySelector(".auth-submit");
 
     document.documentElement.classList.add("auth-ready");
+
+    form.addEventListener("input", () => {
+      clearLoginError();
+    });
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -214,19 +219,33 @@
         return;
       }
 
-      const isValid = await validateCredentials(username, password);
-      if (!isValid) {
-        showLoginError("Неверный логин или пароль.");
-        return;
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.classList.add("is-busy");
+        submitButton.textContent = "Проверяем доступ...";
       }
 
-      setSession({
-        username,
-        password,
-        createdAt: new Date().toISOString(),
-      });
+      try {
+        const isValid = await validateCredentials(username, password);
+        if (!isValid) {
+          showLoginError("Неверный логин или пароль.");
+          return;
+        }
 
-      window.location.replace(nextPathFromQuery());
+        setSession({
+          username,
+          password,
+          createdAt: new Date().toISOString(),
+        });
+
+        window.location.replace(nextPathFromQuery());
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.classList.remove("is-busy");
+          submitButton.textContent = "Войти в дашборды";
+        }
+      }
     });
   }
 
