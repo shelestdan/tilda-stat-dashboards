@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ru" data-protected="true">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <title>Главная страница статистики</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="auth-config.js"></script>
+    <script src="auth.js"></script>
+  </head>
+  <body>
+    <div class="page-noise" aria-hidden="true"></div>
+    <main class="shell shell--hub" data-auth-guard>
+      <nav class="page-nav reveal" aria-label="Навигация по дашбордам">
+        <span class="page-nav__trail">Каталог дашбордов</span>
+        <span class="page-nav__spacer"></span>
+        <button class="page-nav__button" type="button" data-auth-logout>Выйти</button>
+      </nav>
+
+      <header class="hero hero--hub reveal">
+        <div class="hero__eyebrow">Центр статистики</div>
+        <div class="hero__grid hero__grid--hub">
+          <div class="hero__copy">
+            <h1>Выбор дашбордов по сайтам</h1>
+            <p>
+              Здесь собраны все доступные статистические дашборды. Сейчас подключены
+              RVZ и VGS2000, а структура главной страницы уже рассчитана на дальнейшее
+              добавление новых площадок и новых групп сайтов.
+            </p>
+          </div>
+          <div class="hero__meta hero__meta--hub" id="hub-overview"></div>
+        </div>
+      </header>
+
+      <section class="summary-strip summary-strip--hub reveal" id="hub-summary" aria-label="Сводка каталога"></section>
+
+      <section class="hub-grid" id="dashboard-catalog" aria-label="Каталог дашбордов"></section>
+
+      <section class="panel panel--hub-note reveal">
+        <div class="panel__head panel__head--stack">
+          <div>
+            <div class="panel__eyebrow">Масштабирование</div>
+            <h2>Главная уже готова к расширению</h2>
+          </div>
+          <p class="panel__sub">
+            Когда появится новый сайт или новая группа сайтов, мы просто добавим
+            еще один дашборд в каталог, не ломая текущую структуру.
+          </p>
+        </div>
+        <div class="hub-checklist">
+          <div class="hub-check">1. Отдельная страница дашборда с визуализацией</div>
+          <div class="hub-check">2. Подключенный зашифрованный датасет</div>
+          <div class="hub-check">3. Одна запись в каталоге главной страницы</div>
+        </div>
+      </section>
+    </main>
+
+    <script src="home.js"></script>
+  </body>
+</html>

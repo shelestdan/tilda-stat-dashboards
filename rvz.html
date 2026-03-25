@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ru" data-protected="true" data-dashboard-source="data/site-stats.enc.json">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <title>Дашборд статистики RVZ</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="auth-config.js"></script>
+    <script src="auth.js"></script>
+  </head>
+  <body>
+    <div class="page-noise" aria-hidden="true"></div>
+    <main class="shell" data-auth-guard>
+      <nav class="page-nav reveal" aria-label="Навигация по дашбордам">
+        <a class="page-nav__link" href="hub.html">Все дашборды</a>
+        <span class="page-nav__divider">/</span>
+        <span class="page-nav__trail">RVZ</span>
+        <span class="page-nav__spacer"></span>
+        <button class="page-nav__button" type="button" data-auth-logout>Выйти</button>
+      </nav>
+
+      <header class="hero reveal">
+        <div class="hero__eyebrow">Дашборд статистики сайта</div>
+        <div class="hero__grid">
+          <div class="hero__copy">
+            <h1>RVZ: единый дашборд по основному сайту и промо-зеркалу</h1>
+            <p>
+              Здесь собраны суммарные KPI, месячная динамика, источники, география и
+              контент-лидеры сразу по двум площадкам в одном рабочем экране.
+            </p>
+          </div>
+          <div class="hero__meta" id="project-meta"></div>
+        </div>
+      </header>
+
+      <section class="summary-strip reveal" id="summary-strip" aria-label="Сводка показателей"></section>
+
+      <section class="dashboard-grid dashboard-grid--lead">
+        <article class="panel panel--wide panel--traffic reveal">
+          <div class="panel__head">
+            <div>
+              <div class="panel__eyebrow">Динамика трафика</div>
+              <h2>Сессии, просмотры и посетители</h2>
+            </div>
+            <p class="panel__note" id="traffic-note"></p>
+          </div>
+          <div class="chart-box" id="traffic-chart"></div>
+        </article>
+
+        <article class="panel panel--device reveal">
+          <div class="panel__head">
+            <div>
+              <div class="panel__eyebrow">Аудитория</div>
+              <h2>Устройства</h2>
+            </div>
+          </div>
+          <div id="device-breakdown"></div>
+        </article>
+
+        <article class="panel panel--sources reveal">
+          <div class="panel__head">
+            <div>
+              <div class="panel__eyebrow">Каналы</div>
+              <h2>Распределение источников</h2>
+            </div>
+            <p class="panel__note">Сводка категорий источников из экспорта Tilda</p>
+          </div>
+          <div id="source-breakdown"></div>
+        </article>
+      </section>
+
+      <section class="dashboard-grid dashboard-grid--secondary">
+        <article class="panel panel--wide reveal">
+          <div class="panel__head">
+            <div>
+              <div class="panel__eyebrow">Результат</div>
+              <h2>Заявки и конверсия по месяцам</h2>
+            </div>
+            <p class="panel__note" id="leads-note"></p>
+          </div>
+          <div class="chart-box" id="leads-chart"></div>
+        </article>
+
+        <article class="panel reveal">
+          <div class="panel__head panel__head--stack">
+            <div>
+              <div class="panel__eyebrow">Детализация</div>
+              <h2>Разрез по каналам</h2>
+            </div>
+            <p class="panel__sub">
+              Можно быстро переключаться между поиском, рефералами, соцсетями, email и рекламой.
+            </p>
+          </div>
+          <div class="segmented" id="channel-tabs" role="tablist" aria-label="Каналы"></div>
+          <p class="panel__meta-note" id="channel-note"></p>
+          <div id="channel-list"></div>
+        </article>
+      </section>
+
+      <section class="panel reveal panel--lead-sites">
+        <div class="panel__head">
+          <div>
+            <div class="panel__eyebrow">Заявки Tilda</div>
+            <h2>Из каких сайтов сложилась сумма заявок</h2>
+          </div>
+          <p class="panel__note" id="lead-sites-note"></p>
+        </div>
+        <div id="lead-sites-table"></div>
+      </section>
+
+      <section class="dashboard-grid dashboard-grid--geo">
+        <article class="panel reveal">
+          <div class="panel__head">
+            <div>
+              <div class="panel__eyebrow">География</div>
+              <h2>Страны</h2>
+            </div>
+          </div>
+          <div id="country-list"></div>
+        </article>
+
+        <article class="panel reveal">
+          <div class="panel__head">
+            <div>
+              <div class="panel__eyebrow">География</div>
+              <h2>Города</h2>
+            </div>
+          </div>
+          <div id="city-list"></div>
+        </article>
+
+        <article class="panel reveal">
+          <div class="panel__head">
+            <div>
+              <div class="panel__eyebrow">Товары</div>
+              <h2>Топ товаров</h2>
+            </div>
+            <p class="panel__note" id="products-note"></p>
+          </div>
+          <div id="product-list"></div>
+        </article>
+      </section>
+
+      <section class="panel reveal">
+        <div class="panel__head panel__head--stack">
+          <div>
+            <div class="panel__eyebrow">Контент и действия</div>
+            <h2>Товары, страницы, события и UTM</h2>
+          </div>
+          <p class="panel__sub">
+            Один экран для просмотра самых посещаемых разделов сайта, товаров и событий электронной коммерции.
+          </p>
+        </div>
+        <div class="segmented segmented--wide" id="content-tabs" role="tablist" aria-label="Контент"></div>
+        <div id="content-table"></div>
+      </section>
+    </main>
+    <script src="dashboard-loader.js"></script>
+  </body>
+</html>

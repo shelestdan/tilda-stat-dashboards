@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <title>Вход в дашборды статистики</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="auth-config.js"></script>
+    <script src="auth.js"></script>
+  </head>
+  <body>
+    <div class="page-noise" aria-hidden="true"></div>
+    <main class="shell shell--auth">
+      <header class="hero hero--login reveal">
+        <div class="hero__eyebrow">Защищенный вход</div>
+        <div class="hero__grid hero__grid--hub">
+          <div class="hero__copy">
+            <h1>Дашборды Tilda под входом</h1>
+            <p>
+              Это точка входа в общую статистику по проектам RVZ и VGS2000.
+              После авторизации откроется главная страница со списком доступных дашбордов.
+            </p>
+          </div>
+          <div class="hero__meta hero__meta--hub">
+            <div class="meta-line meta-line--compact">
+              <span>Режим</span>
+              <strong>Вход обязателен</strong>
+            </div>
+            <div class="meta-line meta-line--compact">
+              <span>После входа</span>
+              <strong>Главная + 2 дашборда</strong>
+            </div>
+            <div class="meta-stack">
+              <span>Что внутри</span>
+              <div class="meta-pills">
+                <span class="meta-pill">RVZ</span>
+                <span class="meta-pill">VGS2000</span>
+                <span class="meta-pill">Главная страница</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="auth-grid">
+        <article class="panel panel--auth reveal">
+          <div class="panel__head panel__head--stack">
+            <div>
+              <div class="panel__eyebrow">Авторизация</div>
+              <h2>Открыть доступ к статистике</h2>
+            </div>
+            <p class="panel__sub">
+              Введите логин и пароль, чтобы загрузить защищенные датасеты и перейти в каталог дашбордов.
+            </p>
+          </div>
+
+          <form class="auth-form" id="login-form">
+            <label class="auth-field">
+              <span>Логин</span>
+              <input id="login-username" name="username" type="text" autocomplete="username" required>
+            </label>
+
+            <label class="auth-field">
+              <span>Пароль</span>
+              <input id="login-password" name="password" type="password" autocomplete="current-password" required>
+            </label>
+
+            <p class="auth-error" id="login-error" hidden></p>
+
+            <button class="auth-submit" type="submit">Войти в дашборды</button>
+          </form>
+        </article>
+
+        <article class="panel panel--auth-note reveal">
+          <div class="panel__head panel__head--stack">
+            <div>
+              <div class="panel__eyebrow">Важно</div>
+              <h2>Это легкая защита для GitHub Pages</h2>
+            </div>
+            <p class="panel__sub">
+              Интерфейс скрыт за входом, а датасеты на сайте лежат в зашифрованном виде.
+              Для действительно чувствительной аналитики лучше использовать серверный доступ-контроль.
+            </p>
+          </div>
+
+          <div class="auth-points">
+            <div class="auth-point">Главная страница открывается только после успешного входа.</div>
+            <div class="auth-point">Дашборды RVZ и VGS2000 защищены этим же входом.</div>
+            <div class="auth-point">Поисковые системы дополнительно просят не индексировать страницы.</div>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <script>
+      window.TildaAuth.initLoginPage();
+    </script>
+  </body>
+</html>

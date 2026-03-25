@@ -1,0 +1,12 @@
+.DS_Store
+.venv/
+private/
+__pycache__/
+*.pyc
+*.pyo
+*.tmp
+*.swp
+data/site-stats.json
+data/vgs2000-stats.json
+data/site-stats.js
+data/vgs2000-stats.js
