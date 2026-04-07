@@ -71,3 +71,17 @@ TILDA_DASHBOARD_USER=viewer \
 TILDA_DASHBOARD_PASSWORD=your-password \
 ./.venv/bin/python scripts/build_protected_payloads.py
 ```
+
+Для нескольких пользователей можно передать JSON-файл со списком логинов и паролей:
+
+```json
+[
+  { "username": "user-1", "password": "secret-1" },
+  { "username": "user-2", "password": "secret-2" }
+]
+```
+
+```bash
+TILDA_DASHBOARD_USERS_FILE=/absolute/path/to/users.json \
+./.venv/bin/python scripts/build_protected_payloads.py
+```

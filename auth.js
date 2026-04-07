@@ -46,18 +46,31 @@
   }
 
   async function validateCredentials(username, password) {
-    if (!config || username !== config.username) {
+    if (!config) {
+      return false;
+    }
+
+    const entries = [];
+    if (Array.isArray(config.users)) {
+      entries.push(...config.users);
+    }
+    if (config.username && config.auth && !entries.some((entry) => entry.username === config.username)) {
+      entries.push({ username: config.username, auth: config.auth });
+    }
+
+    const match = entries.find((entry) => entry && entry.username === username && entry.auth);
+    if (!match) {
       return false;
     }
 
     const digest = await pbkdf2Bytes(
       `${username}:${password}`,
-      config.auth.salt,
-      config.auth.iterations,
+      match.auth.salt,
+      match.auth.iterations,
       32,
     );
 
-    return bytesToBase64(digest) === config.auth.hash;
+    return bytesToBase64(digest) === match.auth.hash;
   }
 
   function getSession() {
@@ -133,20 +146,45 @@
     const payload = await response.json();
 
     try {
-      const keyBytes = await pbkdf2Bytes(
-        session.password,
-        payload.kdf.salt,
-        payload.kdf.iterations,
-        32,
-      );
-      const key = await window.crypto.subtle.importKey("raw", keyBytes, "AES-GCM", false, ["decrypt"]);
+      let key;
+
+      if (payload.wrappedKeys && payload.wrappedKeys[session.username]) {
+        const wrapped = payload.wrappedKeys[session.username];
+        const passwordKeyBytes = await pbkdf2Bytes(
+          session.password,
+          wrapped.kdf.salt,
+          wrapped.kdf.iterations,
+          32,
+        );
+        const passwordKey = await window.crypto.subtle.importKey("raw", passwordKeyBytes, "AES-GCM", false, ["decrypt"]);
+        const contentKeyBytes = await window.crypto.subtle.decrypt(
+          {
+            name: "AES-GCM",
+            iv: base64ToBytes(wrapped.iv),
+          },
+          passwordKey,
+          base64ToBytes(wrapped.ciphertext),
+        );
+        key = await window.crypto.subtle.importKey("raw", new Uint8Array(contentKeyBytes), "AES-GCM", false, ["decrypt"]);
+      } else {
+        const legacyPayload = payload.legacy || payload;
+        const keyBytes = await pbkdf2Bytes(
+          session.password,
+          legacyPayload.kdf.salt,
+          legacyPayload.kdf.iterations,
+          32,
+        );
+        key = await window.crypto.subtle.importKey("raw", keyBytes, "AES-GCM", false, ["decrypt"]);
+      }
+
+      const activePayload = payload.wrappedKeys && payload.wrappedKeys[session.username] ? payload : (payload.legacy || payload);
       const decrypted = await window.crypto.subtle.decrypt(
         {
           name: "AES-GCM",
-          iv: base64ToBytes(payload.iv),
+          iv: base64ToBytes(activePayload.iv),
         },
         key,
-        base64ToBytes(payload.ciphertext),
+        base64ToBytes(activePayload.ciphertext),
       );
 
       return JSON.parse(decoder.decode(new Uint8Array(decrypted)));
